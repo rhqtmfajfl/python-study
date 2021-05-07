@@ -1,0 +1,13 @@
+dir()
+['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__', 'a', 'ab', 'b', 'output', 't', 'z', 'z1', 'z2', 'z3', 'ᄏ']
+
+
+메모리에 들어있는 값
+
+del a, b, bb, i,j,t,tt 메모리안에 있는
+변수의 값을 삭제 시킨다.
+
+dir
+del 은 키워드이다.
+
+import keyword
