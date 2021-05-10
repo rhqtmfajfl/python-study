@@ -1,0 +1,14 @@
+class korea(oject): #클래스 선언
+    def __init__(self, city, pop);
+    welf.city = cityself.pop = pop 
+    print('KOrea __init_ : 생성자')
+    
+    def __del__(self):
+        print('korea __dal__ : 소멸자')
+
+    
+    def disp_korea(self):
+        print(self.city, '인구는', self.pop, '만원')
+
+
+print('###############')
