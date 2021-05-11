@@ -1,0 +1,21 @@
+The Python path in your debug configuration is invalid. 파이썬 오류 메시지 해결
+
+문제 해결방법
+1. 오류메시지 출력을 위해 바탕화면에 새로운 폴더를 만들어주고 test_1.py파일을 생성한 뒤
+
+print("python ok?") 라는 간단한 코드를 입력해줍니다.
+
+2. 단축키 Ctrl + Shift + D를 입력한 뒤 Run and Debug에서 create a launch.json.file을 클릭해줍니다.
+
+
+3. 단축키 Ctrl + Shift + P를 입력하거나 화면 위 상단에서 View > Command Palette로 들어가 줍니다.
+
+
+4. 저희는 여기에서 Python Select Interpreter로 들어갑니다.
+
+
+5. Interpreter path를 설정해야합니다. 파이썬 파일이 설치된 경로에 있는 python.exe를 선택합니다.
+
+   저는 c:\python39 폴더에 파이썬 파일이 들어있습니다. 저는 파이썬 경로를 설치할 때 임의로 설정했기 때문에
+
+   여러분의 실제 파이썬 설치경로와 다를 수 있습니다.
