@@ -1,0 +1,19 @@
+모듈 저장 파일 명 :mymodule.py
+실행파일명 : myCalc.py
+
+실행 파일 : *.exe,
+
+
+
+http://example.com
+
+<html>
+
+	<title>나의 홈페이지</title>
+	<body bgcolor= skyblue text=white><br>
+	<h2><hr><br>
+	안녕하세요. 길동이네 집입니다.<br> <hr> <br>
+	<img src = 'mypicture.png' alt ='이미지 없음'>
+	<body>
+
+</html>

@@ -379,6 +379,8 @@ print('student_a <= student_b = ', student_a <= student_b)
 
 #클래스 변수
 
+
+'''
 class Student:
     count = 0
 
@@ -411,3 +413,59 @@ Student('윤명월', 64,88,92,92)
 #출력하빈다.
 print()
 print('현재 생성된 총 학생 수는 {} 명 이빈다.'.format(Student.count))
+'''
+
+
+#클래스 함수
+
+#클래스를 선언
+'''
+class Student:
+    #클래스 변수
+    count = 0
+    students = []
+
+    #클래스 함수
+    @classmethod
+    def print(cls):
+        print('-----학생목록-----')
+        print('이름 \t 총점\t 평균')
+        for student in cls.students:
+            print(str(student))
+        print('--------------------------')
+
+    #인스턴스 함수 
+
+    def __init__(self, name, korean, math, english, science):
+        self.name = nema
+        self
+
+'''
+
+
+
+#사용자 정의 예외를 생성합니다.
+'''
+class CustomException(Exception):
+    def __init__(self, message, value):
+        Exception.__init__(self)
+        self.message = message
+        self.value = value
+    
+    def __str__(self):
+        return self.message
+
+    def print(self):
+        print('오류 정보')
+        print('메시지:', self.message)
+        print('값:', self.value)
+
+try:
+    raise CustomException('딱히 이유없음', 273)
+except CustomException as e:
+    e.print()
+
+'''
+
+
+
