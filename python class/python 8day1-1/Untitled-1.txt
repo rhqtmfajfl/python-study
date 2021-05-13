@@ -1,0 +1,14 @@
+imort sqlite3 as sqlite3
+con = s.connect('c:\\dd\\c1')
+c = con.cursor()
+
+c.execute('drop table if exists lunch')
+c.execute('create table lunch(menu,price)')
+
+
+
+con. commit()
+
+c.close()
+con.close()
+
