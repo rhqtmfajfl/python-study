@@ -13,7 +13,15 @@ c.execute('drop table if exists car')
 c.execute('create table car(name, price)')
 c.execute('insert into car values("volvo", 2000)')
 c.execute('select * from lunch')
+
+# print(c.fetchone())
+# print(c.fetchone())
+# print(c.fetchone())
+# print(c.fetchone())
+# print(c.fetchall())
+
 res = c.fetchall()
+
 
 print('메뉴 가격')
 print('****************')

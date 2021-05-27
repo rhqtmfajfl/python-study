@@ -1,0 +1,47 @@
+mysql 에서
+사용자 id 랑 pw 만드는 것 -
+create user ace@'%' identified by '1234';
+
+권한 부여 -
+grant all privileges on acedb.* to ace@'%' with grant option;
+
+ont 테이블 ->acedb * 전체 acedb 안의 모든 테이블
+사용자 -> ace@'%' 
+with grant option 권한부여 가능
+
+
+*******************
+내가 만든것을 적용 하겠다.  -> flush privileges;
+*****************
+
+cmd 창에서 경로 설정
+
+내컴 c - programfile -  mysql - mysql server8/0 
+C:\Program Files\MySQL\MySQL Server 8.0\bin이 경로로 mysql을 접속한다.
+
+
+ace 계정으로 접속하기 mysql -u ace -p  
+
+
+
+mysql -u ace -p
+-u 유저 
+-p 패스워드
+로 ace에 접속한다.
+
+새로 만든 ace를 cmd 창에서 어느 위치에서나 접속하려면
+
+시스템 환경변수 설정에서 고급에서 사용자변경에서
+
+시스템에 C:\Program Files\MySQL\MySQL Server 8.0\bin이경로를 새로만들기 해서 편집 한다. -> 그러면 어느 위치에서도 할 수 있다.
+
+
+
+
+select * from city limit 100, 10;
+내가 보고자 하는 것을 100 부터 10개씩 나눠서 하는 것이다
+
+
+
+
+

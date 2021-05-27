@@ -12,15 +12,15 @@ c.execute('insert into m values("변호인","양호인","송강호",1137)')
 c.execute('insert into m values("명량","김한민","최민식",1761)')
 c.execute('update m set actor = "김혜수" where actor = "전지현"')
 c.execute('delete from m where title = "국제시장"')
-
+c.execute('select * from m')
 
 res = c.fetchall()
-
+print(res)
 print('movie director actor audience')
 print('***********')
 
 for i in res:
-    print(i[0], i[1],i[2],i[3], )
+    print(i[0], i[1],i[2],i[3] )
 
 con.commit()
 
