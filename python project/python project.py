@@ -80,6 +80,8 @@ fig, ax = plt.subplots()
 
 #ax.plot(day[2194:2558,2:4],day[2194:2558,3:5],color='#c02ad1') ## 선그래프 생성
 ax.plot(fin.iloc[2558:2922,2],fin.iloc[2558:2922,10],color='#c02ad1') ## 선그래프 생성
+ax.set_ylabel('온도', color = 'red')
+
 # ax.set_ylim([0, 30])
 # plt.plot(fin.iloc[2193:2540,2],fin.iloc[2193:2540,3],color='#c02ad1')
 # plt.yticks(np.arange(0,7), ('0','5','10','15','20','25','30'))

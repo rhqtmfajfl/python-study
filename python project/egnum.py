@@ -112,7 +112,7 @@ df =  np.arange(2009,2021)
 # ax.set_ylabel('발전소 개수', color='green')
 # ax.set_xlabel('연도', color='red')
 
-ax.plot(df, kkk, color = 'green')
+ax.bar(df, kkk, color = 'green')
 
 # #print(a)
 

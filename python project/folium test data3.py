@@ -66,12 +66,7 @@ for i in energy.index:
 if df3 >=1085:
         ace = kkk
 g.Marker(ace).add_to(g_map)
-#파일 읽기
-#print(energy.head(10))
-
-# marker.add_to(g_map) # 마지막으로 위에 만들었던 맵에다가 marker를 add 해준다.
-#marker01.add_to(g_map)
-
+ 
 g_map.save('.now_location_map.html')
 
 g_map # 그 후 g_map을 본다.
