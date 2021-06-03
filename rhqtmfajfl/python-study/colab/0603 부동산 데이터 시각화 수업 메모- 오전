@@ -1,0 +1,851 @@
+0603
+오전
+1교시 히스토그램 **분포-빈도** 를 시각화 해서 보여준다.
+
+히스토그램
+히스토그램은 분포-빈도를 시각화 해서 보여줍니다.
+
+가로축에는 분포(데이터)
+세로축에는 빈도 가로축(구간)에 데이터가있음
+
+
+#분양가격의 구간별 빈도수
+df['분양가격'].plot(kind='hist')
+
+-> 히스토그램 표
+
+
+커널 밀도 그래프
+#커널 밀도 그래프도 많이 사용된다 히스토그램과 비슷한데 매끄럽게 표현 된다.
+
+df['분양가격'].plot(kind='kde')#kde = kernel density estimation 커널 밀도 그래프
+
+
+부드럽게 표현 된다.
+
+
+######################################################
+
+특정 구간의 확률을 나타내기 때문에 곡선으로 나타낸다.
+
+
+모든 데이터는 정규 분포를 이루는 것이 좋다.
+
+정규분포모양으로 최대한 가깝게
+
+특성 공학............
+
+
+
+################################################3
+
+hexbin
+
+hexbin : 고밀도 산점도 그래프
+
+x와 y를 모두 넣어줘야 한다.
+    둘 다 numeric한 값이어야 한다.
+이것도 마찬가지로 데이터의 밀도를 추정한다.
+
+
+연도별 분양 가격의 밀도............
+
+
+df.plot(kind='hexbin', x = '분양가격', y ='연도',gridsize = 20)
+
+# gridsize = 20 그래프의 크기 조정
+
+
+
+########################################################
+
+#박스 플롯
+boxplot1
+
+박스 플롯(box)
+데이터의 최대, 최소, 평균, 중간값 등 집계된 정보를 한눈에 볼 수 있게 해주는 시각화 기법
+이상치(outlier)도 손쉽게 판단이 가능하다.
+
+df_seoul = df.loc[df['지역명']== '서울']  # 서울 지역의 데이터만 가져 온다.
+
+df_seoul.head()
+
+
+
+
+df_seoul.describe()['분양가격'] #분양가격에 대한 정보
+
+count      265.000000
+mean      7225.762264
+std       1303.947088
+min       5061.000000
+25%       6477.000000
+50%       6842.000000
+75%       7725.000000
+max      13835.000000
+Name: 분양가격, dtype: float64
+
+
+2교시
+
+결론 -> 
+박스 플롯은 데이터의 이상치(outlier)를 감지할 때 가장 많이 활용된다.
+
+###############################################
+
+
+area plot
+
+ 그래프에서 아래영역(are)를 색치해 주는 것이 특징
+
+
+price_by_month_count = df.groupby('월')['분양가격'].count()
+
+
+price_by_month_count
+월
+1     392
+2     391
+3     313
+4     318
+5     318
+6     317
+7     315
+8     315
+9     316
+10    401
+11    397
+12    392
+Name: 분양가격, dtype: int64
+price_by_month_count.plot(kind='line')
+
+price_by_month_count.plot(kind='area')
+
+
+
+##################################################
+#pie 그래프 plot
+
+pie plot
+pie의 대표적인 사용처 : 데이터의 점유율을 볼 때 가장 많이 사용
+
+price_by_year = df.groupby('연도')['분양가격'].count()
+price_by_year
+연도
+2015    243
+2016    984
+2017    975
+2018    919
+2019    912
+2020    152
+Name: 분양가격, dtype: int64
+price_by_year.plot(kind='pie')
+
+# -> 분석에서 파이 그래프는 잘 사용 안함
+
+
+히스토그램 또는 바 그래프 사용
+
+
+
+####################################################
+
+
+scatter plot(산점도 그래프)
+
+
+
+Scatter plot( 산점도 그래프 )
+점으로 데이터를 표기
+x, y값을 모두 넣어줘야 하며, x, y축 모두 numeric 값을 넣어줘야 한다.
+데이터의 분포도를 확인하기 위해 사용
+
+
+df.plot(x='월', y='분양가격', kind='scatter')
+
+
+산점도 그래프
+
+
+
+
+######################################################3
+
+
+#그래프 크기 고정
+
+
+plt.rcParams['figure.figsize'] = (12, 9)
+
+
+
+#1. 밑그림 그리기
+
+그래프가 그려지는 공간 - canvas
+
+
+1-1. 단일 그래프
+
+#data=데이터 생성 
+
+data = np.arange(1, 100)
+
+#그리기(plot)
+plt.plot(data)
+
+== 같은 의미 ↕
+
+#그래프 보여주기
+plt.show()
+
+
+
+#1-2. 다중 그래프(multiple graphs)
+
+1-2. 다중 그래프 (multiple graphs)
+1개의 캔버스 안에 여러 개의 그래프를 그리는 것
+
+data1= np.arange(1,51)
+data2= np.arange(51,101)
+
+# 캔버스에 그래프를 올려가는 과정
+
+plt.plot(data1)
+plt.plot(data2)
+
+#show()를 안해줘도 두개가 동시에 나옴
+#show 전에 여러 개의 그래프를 동시에 올릴 수 있다.]
+
+
+plt.show()
+
+
+
+2개의 figure로 나누어서 다중 그래프 그리기
+
+plt.figure() : 캔버스 설정함수, 호출 할 때마다 캔버스가 하나씩 만들어 진다.
+
+plt.figure() : 캔버스 설정함수,
+
+
+plt.plot(data1) # data1 시각화
+
+plt.figure() # 새로운 캔버스 생성
+
+plt.plot(data2) # 새롭게 만들어진 캔버스에 data2 시각화
+
+plt.show() # 모두 보여주기
+
+
+
+
+1-3 여러 개의 plot을 그리는 방법(subplot)
+
+#subplot(row, column, index) 여기서 index는1부터 시작
+
+
+plt.subplot(2, 1, 1)# 2개의 행을 만들고, 하나의 열을 만들어서 첫 번째 plot에 표시
+
+
+plt.subplot(2, 1, 1)# 2개의 행을 만들고, 하나의 열을 만들어서 첫 번째 plot에 표시
+plt.plot(data1)
+#data 1을 그린것
+
+plt.subplot(2, 1, 2)
+plt.plot(data2)
+#data2를 그린것
+
+plt.show()
+
+
+##################
+
+위와 똑같은 그래프를 그리지만 다른 표현
+
+plt.subplot(211) # row : 2, col : 1, index : 1
+plt.plot(data1)
+
+plt.subplot(212) # row : 2, col : 1, index : 1
+plt.plot(data2)
+
+plt.show()
+
+
+
+######################################################
+
+1-4. 여러 plot을 그리는 방법 (subplots) - s가 더 붙었음!
+
+
+figure, axes = plt.subplots(행의 개수, 열의 개수)
+
+figure : 캔버스 설정을 할 수 있는 객체
+
+axes : ax(그래프를 그릴 수 있는 공간)이 여러 개 있는 것 ( ax의 배열 )
+
+
+
+
+
+plt.rcParams['axes.unicode_minus'] = False # -1 을 나타내고 싶을 때#
+
+fig, axes = plt.subplots(2, 3) # -> 2개의 행 3개의열 의 상자가 만들어 진다.
+
+axes[0,0].plot(data1)
+axes[0,1].plot(data1 * data1)
+axes[0,2].plot(data1 **3)
+
+axes[1,0].plot(data2 %10)
+axes[1,1].plot(-1  * data1)
+axes[1,2].plot(data1 // 20)
+
+plt.tight_layout() # 여러 개의 subplots 그래프를 그릴 때 캔버스를 꽉 채우도록 해주는 옵션(선택)
+
+
+
+
+#########################################################
+
+2. 스타일 옵션
+
+
+
+from IPython.display import Image
+
+# 출처: matplotlib.org
+Image('https://matplotlib.org/_images/anatomy.png')
+
+
+
+
+#########################################################
+
+
+
+#2-1 타이틀 그래프의 제목
+
+
+plt.plot(data1)
+plt.plot(data2)
+
+#그래프의 제목 설정하기
+
+plt.title('여기는 타이레놀 입니다.')
+# plt.title('여기는 타이레놀 입니다.',fontsize =20)
+# 폰트 사이즈 변경 (타이틀의)
+plt.show()
+
+2-2 xy label 설정
+plt.plot(data1)
+plt.plot(data2)
+
+plt.title('label 설정 예제', fontsize = 20)
+
+plt.xlabel('x축이여', fontsize = 20)
+
+plt.ylabel('y축이여', fontsize = 30)
+
+plt.show()
+
+
+
+
+
+2-3. tick 설정하기 ( rotation )
+
+
+
+plt.plot(data1 * 2)
+plt.plot(data1 ** 2)
+plt.plot(np.log(data1))
+
+#타이틀 & font 설정
+plt.title('x, y tick rotation')
+
+#x축 y축 label 부여
+plt.xlabel('x 축임')
+
+plt.ylabel('y 축임')
+
+#x tick, y tick 설정
+
+plt.xticks(rotation = 90) # rotation : 텍스트가 돌아가는 각도
+plt.yticks(rotation = 30)
+
+plt.show()
+
+
+
+
+
+
+
+
+2-4 범례 설정 legend
+
+
+plt.plot(data1 * 2)
+plt.plot(data1 ** 2)
+plt.plot(np.log(data1))
+
+#타이틀 & font 설정
+plt.title('x, y tick rotation')
+
+#x축 y축 label 부여
+plt.xlabel('x 축임')
+
+plt.ylabel('y 축임')
+
+#x tick, y tick 설정
+
+plt.xticks(rotation = 90) # rotation : 텍스트가 돌아가는 각도
+plt.yticks(rotation = 30)
+
+#legend(범례) 설정
+plt.legend(['data1 * 2','data1 ** 2', 'log(data1)'])
+
+plt.show()
+
+
+
+
+#plot 과 함께 lael 넣어서 범례 설정하기
+
+plt.plot(data1 * 2, label='a') #그래프를 그리면서 label 에 값을 넣어주면 범례 이름 새로 설정
+plt.plot(data1 ** 2, label='b')
+plt.plot(np.log(data1), label='c')
+
+#타이틀 & font 설정
+plt.title('x, y tick rotation')
+
+#x축 y축 label 부여
+plt.xlabel('x 축임')
+
+plt.ylabel('y 축임')
+
+#x tick, y tick 설정
+
+plt.xticks(rotation = 90) # rotation : 텍스트가 돌아가는 각도
+plt.yticks(rotation = 30)
+
+#legend(범례) 설정
+plt.legend()  #범례가 a b c 가 됨
+
+plt.show()
+
+
+
+
+
+
+
+
+
+2-5 x y의 한계점
+
+
+
+plt.plot(data1 * 2, label='a') #그래프를 그리면서 label 에 값을 넣어주면 범례 이름 새로 설정
+plt.plot(data1 ** 2, label='b')
+plt.plot(np.log(data1), label='c')
+
+#타이틀 & font 설정
+plt.title('x, y tick rotation')
+
+#x축 y축 label 부여
+plt.xlabel('x 축임')
+
+plt.ylabel('y 축임')
+
+#x tick, y tick 설정
+
+plt.xticks(rotation = 90) # rotation : 텍스트가 돌아가는 각도
+plt.yticks(rotation = 30)
+
+#legend(범례) 설정
+plt.legend()
+
+#x와 y의 limit 설정
+plt.xlim(0,10)
+plt.ylim(20, 100) #특정 구간만 크게 해서 본다.
+
+
+
+plt.show()
+
+
+
+
+
+
+
+
+
+
+# 2-6 스타일 세부 설정 marker, line, color 설정
+
+
+
+
+data =  np.arange(10)
+
+plt.plot(data, data * 2, marker='o', markersize = 5)
+plt.plot(data, data * 2 - 10, marker='H', markersize = 10)
+plt.plot(data, data * 2 - 25, marker='D', markersize = 15)
+plt.plot(data, data * 2 - 30, marker='*', markersize = 20)
+
+
+
+
+
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+2-7 LINE 의 종류
+
+
+line의 종류
+
+'-' solid line style
+'--' dashed line style
+'-.' dash-dot line style
+':' dotted line style
+
+
+
+data =  np.arange(10)
+
+plt.plot(data, data * 2, marker='o', linestyle='') #선이 안보임
+plt.plot(data, data * 2 - 10, marker='H', linestyle='-') # 실선
+plt.plot(data, data * 2 - 25, marker='D', linestyle='--')# 잛은 실선
+plt.plot(data, data * 2 - 30, marker='*', linestyle='-.') #선-점
+plt.plot(data, data * 2 - 40, marker='1', linestyle=':')#점선
+
+
+
+plt.show()
+
+
+
+
+
+
+
+
+2-8 color의 종류
+
+'b' blue
+'g' green
+'r' red
+'c' cyan
+'m' magenta
+'y' yellow
+'k' black
+'w' white
+
+
+
+data = np.arange(10)
+
+plt.plot(data, data * 2,      marker='o', linestyle='',  color='k')   # 선이 안보임
+plt.plot(data, data * 2 - 10, marker='^', linestyle='-', color='c')  # 실선
+plt.plot(data, data * 2 - 20, marker='d', linestyle='--', color='y') # 짧은 실선
+plt.plot(data, data * 2 - 30, marker='*', linestyle="-.", color='b') # 선-점 
+plt.plot(data, data * 2 - 40, marker='1', linestyle=":", color='m')  # 점선
+
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2-9
+alpha를 사용하면 투명도 조절이 가능
+
+0 ~ 1사이로 설정
+0에 가까울수록 투명해지고, 1에 가까울수록 불투명해 진다.
+
+
+
+data = np.arange(10)
+
+plt.plot(data, data * 2,      marker='o', linestyle='',  color='k', alpha=0.1)   # 선이 안보임
+plt.plot(data, data * 2 - 10, marker='^', linestyle='-', color='c', alpha=0.3)  # 실선
+plt.plot(data, data * 2 - 20, marker='d', linestyle='--', color='y', alpha=0.5) # 짧은 실선
+plt.plot(data, data * 2 - 30, marker='*', linestyle="-.", color='b', alpha=0.7) # 선-점 
+plt.plot(data, data * 2 - 40, marker='1', linestyle=":", color='m', alpha=0.9)  # 점선
+
+plt.show()
+
+
+
+
+###############################################################3
+
+2.2.matplotlib을 활용한 다양한 그래프 그리기.ipynb
+
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+plt.rcParams['axes.unicode_minus'] = False 
+plt.rcParams['figure.figsize'] = (8, 5)
+
+-> 위의 두개는 한 줄로 쓸 수 없음
+
+1.scater
+
+1-1. x, y, colors, area 설정하기
+colors : 어떠한 정수 값을 색상으로 표현해 줍니다.
+area : 점의 크기. 값이 커지면 점이
+
+
+#scatter 
+#1-1 x,y, colors, are 설정하기
+
+x = np.random.rand(50)
+y = np.random.rand(50)
+
+
+colors = np.arange(50)
+area = x * y *1000
+
+plt.scatter(x,y, s=area, c=colors) # s : 점의 크기, c : 점의 색상
+plt.show()
+
+
+
+
+
+1-2
+1-2. cmap, alpha
+cmap에 컬러를 지정하면, 컬러 값을 모두 동일하게 설정
+alpha는 투명도를 나타내며, 0~1사이의 값을 갖고, 0에 가까울 수록 투명해진다.
+[25]
+
+
+#1-2 cmap, alpha
+
+#현재 사용할 figure에 대해서만 크기 조절하기.
+plt.figure(figsize=(12,6))
+
+
+plt.subplot(231) #캠퍼스 안에 캠퍼스 만든것
+
+plt.scatter(x, y, s = area, cmap= 'blue', alpha = 0.1)
+plt.title('alpha = 0.1')
+
+plt.subplot(232)
+plt.scatter(x, y, s= area, cmap='c', alpha =0.5)
+plt.title('alpha =0.5')
+
+plt.subplot(233)  #앞의 숫자는 행 3은 열 마지막 3은 3번째
+plt.scatter(x, y, s=area, c=y, alpha =1.0) #컬러 배경
+plt.title('alpha=1.0, colorbar')
+plt.colorbar() #값별 농도 확인
+
+
+plt.subplot(234)  #앞의 숫자는 행 3은 열 마지막 4는 4번째
+plt.scatter(x, y, s=area, c=y, alpha =1.0) #컬러 배경
+plt.title('alpha=1.0, colorbar')
+plt.colorbar() #값별 농도 확인
+plt.subplot(235)  #앞의 숫자는 행 3은 열 마지막 5는 5번째
+plt.scatter(x, y, s=area, c=y, alpha =1.0) #컬러 배경
+plt.title('alpha=1.0, colorbar')
+plt.colorbar() #값별 농도 확인
+plt.subplot(236)  #앞의 숫자는 행 3은 열 마지막 6은 6번째
+plt.scatter(x, y, s=area, c=y, alpha =1.0) #컬러 배경
+plt.title('alpha=1.0, colorbar')
+plt.colorbar() #값별 농도 확인
+
+
+plt.show()
+
+
+
+
+2. Barplot, Barhplot
+
+
+2-1. 기본 Barplot 그리기
+
+x = ["Math", "Programming", "Science", "English", "PE"]
+y = [70, 80, 60, 40, 50]   #x ,y 는 1:1 매칭
+
+plt.bar(x, y)
+
+######
+plt.xticks(x) #카테고리를설정하는 것
+#####
+
+plt.xlabel("Subjects")
+plt.ylabel("Score")
+
+
+
+2-2. Barhplot
+barh함수에서는 xticks로 설정했던 카테고리 부분이 yticks로 변경되어야 한다.
+
+
+
+x = ["Math", "Programming", "Science", "English", "PE"]
+y = [70, 80, 60, 40, 50]
+
+
+
+plt.barh(x, y) #원래 이렇게만 하면 에러 발생
+  #xd와 y의 축의 위치를 바꾼다.
+plt.yticks(x) # 로 설정을 해줘야함
+plt.show()
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$
+[번외] Barplot에서 비교 그래프 그리기
+하나의 캔버스에 2개이상의 Bar 그리기
+
+
+x_label = ["Math", "Programming", "Science", "English", "PE"]
+x = np.arange(len(x_label)) # 실제 label의 개수만큼 정수 배열 생성
+
+y_1 = [70, 80, 60, 40, 50] # 첫 번째 사람의 점수
+y_2 = [100, 60, 90, 45, 90] # 두 번째 사람의 점수
+
+fig, axes = plt.subplots() # 1, 1 형태의 ax 하나 생성.
+
+# bar의 넓이 넓이 지정
+width = 0.35
+axes.bar(x - width/2, y_1, width, align='center', alpha=0.5)  #0버 데이터를 그릴 때 차지할 공간 0.35 의 절반만긐
+axes.bar(x + width/2, y_2, width, align='center', alpha=0.8)
+
+# xticks 설정
+plt.xticks(x)
+
+axes.set_xticklabels(x_label) # 실제 표시할 레이블
+plt.show()
+
+
+
+#######################
+
+
+3-1. 기본 lineplot 그리기
+
+
+#3. line plot
+
+x = np.arange(0, 10, 0.1)
+
+y = 1 + np.sin(x)
+
+plt.plot (x,y)
+
+plt.grid() #그리드 표시 뒫에 선
+
+plt.show()#
+
+
+
+
+
+
+
+
+
+3-2 두개이사의 그래프 그리기
+
+
+
+#3-2 두개이사의 그래프 그리기
+
+
+x = np.arange(0, 10, 0.1) #x축을 기준으로 잡는다.
+y_1 = 1 + np.sin(x)
+y_2 = 1 + np.cos(x)
+# x에 대한  y_1, y_2로 본다.
+
+
+
+plt.plot(x, y_1, color='blue', alpha=0.3, label="1+sin") #x의 값에 대한
+plt.plot(x, y_2, color='red', alpha=0.7, label='1+cos')
+->여기서는 x가 기준이기 때문에 x는 바뀌면 안되고 y는 바껴도 된다.
+
+plt.grid()
+plt.legend()
+plt.show()
+
+
+#marker
+
+
+x = np.arange(0, 10, 0.1) #x축을 기준으로 잡는다.
+y_1 = 1 + np.sin(x)
+y_2 = 1 + np.cos(x)
+
+plt.plot(x, y_1, color='blue', alpha=0.3, label="1+sin",marker='^', linestyle = '-.') #x의 값에 대한
+plt.plot(x, y_2, color='red', alpha=0.7, label='1+cos', marker='o',linestyle = '--')
+
+plt.grid()
+plt.legend()
+plt.show()
+
+
+linestyle 변경
+
+
+x = np.arange(0, 10, 0.1)
+y_1 = 1 + np.sin(x)
+y_2 = 1 + np.cos(x)
+
+plt.plot(x, y_1, color='blue', alpha=0.3, label="1+sin", linestyle="-.")
+plt.plot(x, y_2, color='red', alpha=0.7,  label="1+cos", linestyle=":")
+
+plt.grid()
+plt.legend()
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
