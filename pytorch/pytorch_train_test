@@ -1,0 +1,372 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "785f6e24",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Collecting torchtext\n",
+      "  Downloading torchtext-0.10.0-cp38-cp38-win_amd64.whl (1.4 MB)\n",
+      "Requirement already satisfied: numpy in c:\\users\\cpb06gamen\\anaconda3\\lib\\site-packages (from torchtext) (1.20.1)\n",
+      "Requirement already satisfied: tqdm in c:\\users\\cpb06gamen\\anaconda3\\lib\\site-packages (from torchtext) (4.59.0)\n",
+      "Requirement already satisfied: requests in c:\\users\\cpb06gamen\\anaconda3\\lib\\site-packages (from torchtext) (2.25.1)\n",
+      "Requirement already satisfied: torch==1.9.0 in c:\\users\\cpb06gamen\\anaconda3\\lib\\site-packages (from torchtext) (1.9.0)\n",
+      "Requirement already satisfied: typing_extensions in c:\\users\\cpb06gamen\\anaconda3\\lib\\site-packages (from torch==1.9.0->torchtext) (3.7.4.3)\n",
+      "Requirement already satisfied: certifi>=2017.4.17 in c:\\users\\cpb06gamen\\anaconda3\\lib\\site-packages (from requests->torchtext) (2020.12.5)\n",
+      "Requirement already satisfied: idna<3,>=2.5 in c:\\users\\cpb06gamen\\anaconda3\\lib\\site-packages (from requests->torchtext) (2.10)\n",
+      "Requirement already satisfied: urllib3<1.27,>=1.21.1 in c:\\users\\cpb06gamen\\anaconda3\\lib\\site-packages (from requests->torchtext) (1.26.4)\n",
+      "Requirement already satisfied: chardet<5,>=3.0.2 in c:\\users\\cpb06gamen\\anaconda3\\lib\\site-packages (from requests->torchtext) (4.0.0)\n",
+      "Installing collected packages: torchtext\n",
+      "Successfully installed torchtext-0.10.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "# 토치텍스트 튜토리얼\n",
+    "!pip install torchtext"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "00634192",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 1. 훈련 데이터와 테스트 데이터로 분리하기"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "2ef56d96",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import urllib.request\n",
+    "import pandas as pd"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "64c0fc9d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# OPUS-100 load\n",
+    "path = 'C:/Users/CPB06GameN/Downloads/opus-100'\n",
+    "excel_file = 'test_16.xlsx'\n",
+    "file_data = path + '/' + excel_file\n",
+    "\n",
+    "test_data = pd.read_excel(file_data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "50e9763d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "test_data_set = pd.DataFrame()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "9611c2bc",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Unnamed: 0</th>\n",
+       "      <th>Unnamed: 0.1</th>\n",
+       "      <th>src-lang</th>\n",
+       "      <th>src</th>\n",
+       "      <th>tgt</th>\n",
+       "      <th>tgt-lang</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>0</td>\n",
+       "      <td>411</td>\n",
+       "      <td>ar</td>\n",
+       "      <td>إن حالة الأطفال في بوركينا فاسو ما زالت مقلقة ...</td>\n",
+       "      <td>Their situation in Burkina Faso remained alarm...</td>\n",
+       "      <td>en</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>1</td>\n",
+       "      <td>1825</td>\n",
+       "      <td>ar</td>\n",
+       "      <td>فقط فيما بيني وبينك...</td>\n",
+       "      <td>Just between the two of us...</td>\n",
+       "      <td>en</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2</td>\n",
+       "      <td>1853</td>\n",
+       "      <td>ar</td>\n",
+       "      <td>لقد إرتدى زي جاسوس بريطاني خيالي وبقي في الظل ...</td>\n",
+       "      <td>He dressedike a fictiol British spy and pursue...</td>\n",
+       "      <td>en</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>3</td>\n",
+       "      <td>977</td>\n",
+       "      <td>ar</td>\n",
+       "      <td>إنتبه إلي كلامك، يافتي</td>\n",
+       "      <td>Watch your tongue boy.</td>\n",
+       "      <td>en</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>4</td>\n",
+       "      <td>1623</td>\n",
+       "      <td>ar</td>\n",
+       "      <td>ايضا \" انا و داني ذهبنا الى هناك وبدءنا اللعب ...</td>\n",
+       "      <td>So me and Danny went in and we started playing...</td>\n",
+       "      <td>en</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>...</th>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2595</th>\n",
+       "      <td>2595</td>\n",
+       "      <td>1691</td>\n",
+       "      <td>zh</td>\n",
+       "      <td>有些代表指出也可以像工作组先前所作的那样采用“主席之友”替代主席团。</td>\n",
+       "      <td>Some recalled that it was also possible to use...</td>\n",
+       "      <td>en</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2596</th>\n",
+       "      <td>2596</td>\n",
+       "      <td>265</td>\n",
+       "      <td>zh</td>\n",
+       "      <td>这是个临终时所作的 他肯定看到了什么...</td>\n",
+       "      <td>A desperate dying act.</td>\n",
+       "      <td>en</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2597</th>\n",
+       "      <td>2597</td>\n",
+       "      <td>726</td>\n",
+       "      <td>zh</td>\n",
+       "      <td>三第P.7号决定 技术的开发和转让 20</td>\n",
+       "      <td>Decision P. Development and transfer of techno...</td>\n",
+       "      <td>en</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2598</th>\n",
+       "      <td>2598</td>\n",
+       "      <td>1158</td>\n",
+       "      <td>zh</td>\n",
+       "      <td>你俩听着.</td>\n",
+       "      <td>Heads up you two.</td>\n",
+       "      <td>en</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2599</th>\n",
+       "      <td>2599</td>\n",
+       "      <td>1568</td>\n",
+       "      <td>zh</td>\n",
+       "      <td>像秘书长所提醒我们的那样今天的问题是不受边界和法律局限的问题。</td>\n",
+       "      <td>Today's problems as the SecretaryGeneral has r...</td>\n",
+       "      <td>en</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>2600 rows × 6 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      Unnamed: 0  Unnamed: 0.1 src-lang  \\\n",
+       "0              0           411       ar   \n",
+       "1              1          1825       ar   \n",
+       "2              2          1853       ar   \n",
+       "3              3           977       ar   \n",
+       "4              4          1623       ar   \n",
+       "...          ...           ...      ...   \n",
+       "2595        2595          1691       zh   \n",
+       "2596        2596           265       zh   \n",
+       "2597        2597           726       zh   \n",
+       "2598        2598          1158       zh   \n",
+       "2599        2599          1568       zh   \n",
+       "\n",
+       "                                                    src  \\\n",
+       "0     إن حالة الأطفال في بوركينا فاسو ما زالت مقلقة ...   \n",
+       "1                                فقط فيما بيني وبينك...   \n",
+       "2     لقد إرتدى زي جاسوس بريطاني خيالي وبقي في الظل ...   \n",
+       "3                                إنتبه إلي كلامك، يافتي   \n",
+       "4     ايضا \" انا و داني ذهبنا الى هناك وبدءنا اللعب ...   \n",
+       "...                                                 ...   \n",
+       "2595                 有些代表指出也可以像工作组先前所作的那样采用“主席之友”替代主席团。   \n",
+       "2596                              这是个临终时所作的 他肯定看到了什么...   \n",
+       "2597                               三第P.7号决定 技术的开发和转让 20   \n",
+       "2598                                              你俩听着.   \n",
+       "2599                    像秘书长所提醒我们的那样今天的问题是不受边界和法律局限的问题。   \n",
+       "\n",
+       "                                                    tgt tgt-lang  \n",
+       "0     Their situation in Burkina Faso remained alarm...       en  \n",
+       "1                         Just between the two of us...       en  \n",
+       "2     He dressedike a fictiol British spy and pursue...       en  \n",
+       "3                                Watch your tongue boy.       en  \n",
+       "4     So me and Danny went in and we started playing...       en  \n",
+       "...                                                 ...      ...  \n",
+       "2595  Some recalled that it was also possible to use...       en  \n",
+       "2596                             A desperate dying act.       en  \n",
+       "2597  Decision P. Development and transfer of techno...       en  \n",
+       "2598                                  Heads up you two.       en  \n",
+       "2599  Today's problems as the SecretaryGeneral has r...       en  \n",
+       "\n",
+       "[2600 rows x 6 columns]"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "test_data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "f706d767",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "test_data_set = test_data.drop(['Unnamed: 0','Unnamed: 0.1'], axis=1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "1c9abc78",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "src-lang    2600\n",
+       "src         2591\n",
+       "tgt         2588\n",
+       "tgt-lang    2600\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "test_data_set.count()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "dfd72ef7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "null_drop = test_data_set.dropna(how='any',axis=0)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "a5727127",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "src-lang    2586\n",
+       "src         2586\n",
+       "tgt         2586\n",
+       "tgt-lang    2586\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "null_drop.count()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a7830d83",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.8"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
