@@ -1,0 +1,43 @@
+0810 토큰화 및 bpe 학습
+
+위키독스 bpe에 대해서
+- https://wikidocs.net/22592
+
+file_test4['src'][i] = file_test4['src'][i].replace(r'[-,<>:;、㈠ ；：、♦，]', '')
+
+
+
+*************************************************************
+판다스 테이블을 리스트 형태로 변환 코드 - url 참조
+https://pydole.tistory.com/entry/%EC%9E%91%EC%84%B1%EC%A4%91
+*************************************************************
+
+
+
+R, Python 분석과 프로그래밍의 친구 (by R Friend)
+
+출처: https://rfriend.tistory.com/444 [R, Python 분석과 프로그래밍의 친구 (by R Friend)] -
+
+https://rfriend.tistory.com/444
+
+
+
+[파이썬] 사전의 기본값 처리 (dict.setdefault / collections.defaultdict)
+-
+https://www.daleseo.com/python-collections-defaultdict/
+
+
+BPE 코드 실행 순서 URL -
+
+https://velog.io/@gwkoo/BPEByte-Pair-Encoding
+
+(BPE 코드 실행 순서의 BPE에서 딕셔너리 출력 참고 자료
+딕셔너리 사용 방법들 KEY VALUE ITEM()
+https://www.delftstack.com/ko/howto/python/dictionary-to-tuples-python/
+)
+
+
+Sentencepiece 사용하기
+sentencepiece 사용하기 
+-
+https://inhyeokyoo.github.io/nlp/Sentencepiece/#byte-pair-encoding-bpe
